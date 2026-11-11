@@ -10,7 +10,7 @@ Esta guía explica cómo instalar, actualizar y proteger los datos de la app. No
 
 ## Instalar
 
-1. Abre en el navegador del móvil este enlace: <https://github.com/OWNER/REPO/releases/latest/download/MenuCal.apk>
+1. Abre en el navegador del móvil este enlace: <https://github.com/lazarorgb-lgtm/MenuFogon/releases/latest/download/MenuCal.apk>
 2. Espera a que termine la descarga y pulsa el archivo **MenuCal.apk**.
 3. Si aparece un aviso de que no se permite instalar desde esta fuente, pulsa **Ajustes** y activa la opción para el navegador o el gestor de archivos que estás usando. Después vuelve atrás.
 4. Pulsa **Instalar**. Si Google Play Protect (el antivirus de Google) avisa de que la app no está verificada, elige la opción que permita instalarla igualmente.

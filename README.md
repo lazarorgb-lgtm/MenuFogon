@@ -69,9 +69,7 @@ El keystore usa formato PKCS12, que exige la misma contraseña para el almacén 
 
 `.github/workflows/apk.yml` se ejecuta con cada `push` a `main` y a mano (`workflow_dispatch`), nunca con `pull_request`. Pasa los tests, compila la versión firmada con `versionCode = github.run_number` y publica un GitHub Release marcado como última versión con el archivo `MenuCal.apk`. El enlace fijo de descarga es:
 
-`https://github.com/OWNER/REPO/releases/latest/download/MenuCal.apk`
-
-**Pendiente:** sustituir `OWNER/REPO` por el usuario y el repositorio reales aquí y en `INSTALAR_EN_MOVIL.md` cuando exista el repositorio.
+`https://github.com/lazarorgb-lgtm/MenuFogon/releases/latest/download/MenuCal.apk`
 
 ## Supuestos
 
