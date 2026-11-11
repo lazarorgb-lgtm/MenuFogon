@@ -1,0 +1,316 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "bf385fd4edc1d82b36095bee137100a3",
+    "entities": [
+      {
+        "tableName": "months",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`year` INTEGER NOT NULL, `month` INTEGER NOT NULL, PRIMARY KEY(`year`, `month`))",
+        "fields": [
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "month",
+            "columnName": "month",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "year",
+            "month"
+          ]
+        }
+      },
+      {
+        "tableName": "menu_types",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "menu_files",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`year` INTEGER NOT NULL, `month` INTEGER NOT NULL, `typeId` INTEGER NOT NULL, `fileName` TEXT NOT NULL, `importedAtEpochMs` INTEGER NOT NULL, PRIMARY KEY(`year`, `month`, `typeId`))",
+        "fields": [
+          {
+            "fieldPath": "year",
+            "columnName": "year",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "month",
+            "columnName": "month",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeId",
+            "columnName": "typeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fileName",
+            "columnName": "fileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "importedAtEpochMs",
+            "columnName": "importedAtEpochMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "year",
+            "month",
+            "typeId"
+          ]
+        }
+      },
+      {
+        "tableName": "dishes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `displayName` TEXT NOT NULL, `normalizedName` TEXT NOT NULL, `ingredients` TEXT NOT NULL, `allergens` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "displayName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "normalizedName",
+            "columnName": "normalizedName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ingredients",
+            "columnName": "ingredients",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "allergens",
+            "columnName": "allergens",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_dishes_normalizedName",
+            "unique": true,
+            "columnNames": [
+              "normalizedName"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_dishes_normalizedName` ON `${TABLE_NAME}` (`normalizedName`)"
+          }
+        ]
+      },
+      {
+        "tableName": "daily_menus",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `typeId` INTEGER NOT NULL, `firstDishId` INTEGER, `secondDishId` INTEGER, `firstAllergens` TEXT NOT NULL, `secondAllergens` TEXT NOT NULL, PRIMARY KEY(`date`, `typeId`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeId",
+            "columnName": "typeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstDishId",
+            "columnName": "firstDishId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "secondDishId",
+            "columnName": "secondDishId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "firstAllergens",
+            "columnName": "firstAllergens",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "secondAllergens",
+            "columnName": "secondAllergens",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date",
+            "typeId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_daily_menus_firstDishId",
+            "unique": false,
+            "columnNames": [
+              "firstDishId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_daily_menus_firstDishId` ON `${TABLE_NAME}` (`firstDishId`)"
+          },
+          {
+            "name": "index_daily_menus_secondDishId",
+            "unique": false,
+            "columnNames": [
+              "secondDishId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_daily_menus_secondDishId` ON `${TABLE_NAME}` (`secondDishId`)"
+          }
+        ]
+      },
+      {
+        "tableName": "daily_entries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        }
+      },
+      {
+        "tableName": "entry_lines",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `typeId` INTEGER NOT NULL, `typeName` TEXT NOT NULL, `count` INTEGER NOT NULL, `firstName` TEXT, `firstAllergens` TEXT NOT NULL, `secondName` TEXT, `secondAllergens` TEXT NOT NULL, PRIMARY KEY(`date`, `typeId`), FOREIGN KEY(`date`) REFERENCES `daily_entries`(`date`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeId",
+            "columnName": "typeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "typeName",
+            "columnName": "typeName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "count",
+            "columnName": "count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "firstName",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "firstAllergens",
+            "columnName": "firstAllergens",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "secondName",
+            "columnName": "secondName",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "secondAllergens",
+            "columnName": "secondAllergens",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date",
+            "typeId"
+          ]
+        },
+        "foreignKeys": [
+          {
+            "table": "daily_entries",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "date"
+            ],
+            "referencedColumns": [
+              "date"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bf385fd4edc1d82b36095bee137100a3')"
+    ]
+  }
+}
