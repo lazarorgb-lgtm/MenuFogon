@@ -1,0 +1,22 @@
+# Gradle / build
+.gradle/
+build/
+**/build/
+.kotlin/
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Android
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Firma y secretos: nunca en el repositorio
+*.jks
+*.keystore
+keystore.properties
+secretos*.txt
