@@ -340,7 +340,10 @@ private fun DayEditor(
         }
         if (day.exists) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedButton(onClick = { onPrepare(day.date) }) { Text("Ver qué preparar") }
+                OutlinedButton(onClick = {
+                    viewModel.closeDay()
+                    onPrepare(day.date)
+                }) { Text("Ver qué preparar") }
                 TextButton(onClick = { confirmDelete = true }) { Text("Borrar registro") }
             }
         }
